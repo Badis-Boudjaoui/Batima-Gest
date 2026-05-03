@@ -1018,7 +1018,6 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
 
                               {/* Decoration line */}
                               <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-amber-500/20 to-transparent w-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </div>
                           </motion.div>
                         );
                       })}
@@ -1069,7 +1068,6 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
                               <span className="text-[10px] font-black uppercase tracking-wider">Supprimer</span>
                             </button>
                           </div>
-                        </div>
                       </motion.div>
                     ))}
                   </div>
