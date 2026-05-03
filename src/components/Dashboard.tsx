@@ -495,7 +495,7 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 pt-24 pb-28">
+      <main className="max-w-6xl mx-auto px-4 pt-20 sm:pt-24 pb-24 sm:pb-28">
         <AnimatePresence mode="wait">
           <motion.div
             key={view + (activeBatiment ? activeBatiment.id : "")}
@@ -599,7 +599,7 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: 15, scale: 0.9, filter: "blur(5px)" }}
               transition={{ type: "spring", stiffness: 450, damping: 25 }}
-              className="fixed bottom-[95px] left-1/2 -translate-x-1/2 w-[320px] bg-white/70 dark:bg-black/70 backdrop-blur-3xl rounded-[1.5rem] border border-black/10 dark:border-white/10 shadow-[0_20px_40px_-5px_rgba(0,0,0,0.2)] overflow-hidden z-[60] p-2 ring-1 ring-black/5 dark:ring-white/5 origin-bottom"
+              className="fixed bottom-[95px] left-1/2 -translate-x-1/2 w-[90vw] sm:w-[320px] bg-white/70 dark:bg-black/70 backdrop-blur-3xl rounded-[1.5rem] border border-black/10 dark:border-white/10 shadow-[0_20px_40px_-5px_rgba(0,0,0,0.2)] overflow-hidden z-[60] p-2 ring-1 ring-black/5 dark:ring-white/5 origin-bottom"
             >
               <div className="max-h-[300px] overflow-y-auto no-scrollbar space-y-1">
                 {isDockSearching ? (

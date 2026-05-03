@@ -69,10 +69,10 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
           <p className="text-slate-500 text-lg">Vous ne faites partie d'aucune infrastructure pour le moment.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10" style={{ perspective: "1000px" }}>
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-10" style={{ perspective: "1000px" }}>
           <TiltCard 
             onClick={onCreate}
-            className="group flex flex-col items-center text-center bg-white p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 transition-colors"
+            className="group flex flex-col items-center text-center bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 transition-colors"
           >
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
               <Plus className="w-8 h-8" />
@@ -85,7 +85,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
 
           <TiltCard 
             onClick={onJoin}
-            className="group flex flex-col items-center text-center bg-white p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 transition-colors"
+            className="group flex flex-col items-center text-center bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-900/5 transition-colors"
           >
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
               <KeyRound className="w-8 h-8" />
@@ -115,16 +115,16 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Mes Infrastructures</h1>
-        <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Mes Infrastructures</h1>
+        <div className="flex w-full sm:w-auto gap-3">
           <motion.button 
             initial="rest"
             whileHover="hover"
             whileTap={{ scale: 0.98 }}
             onClick={onCreate} 
             style={{ touchAction: 'manipulation' }}
-            className="flex items-center justify-center py-2.5 px-3 bg-white border border-slate-200 shadow-sm text-slate-800 rounded-xl hover:border-slate-300 hover:bg-slate-50 text-sm font-semibold transition-colors cursor-pointer"
+            className="flex flex-1 sm:flex-none items-center justify-center py-2.5 px-3 bg-white border border-slate-200 shadow-sm text-slate-800 rounded-xl hover:border-slate-300 hover:bg-slate-50 text-sm font-semibold transition-colors cursor-pointer"
           >
             <motion.div variants={{ rest: { rotate: 0 }, hover: { rotate: 90 } }} transition={{ duration: 0.25, ease: "easeOut" }}>
               <Plus className="w-4 h-4 text-slate-500 shrink-0" />
@@ -147,7 +147,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
             whileTap={{ scale: 0.98 }}
             onClick={onJoin} 
             style={{ touchAction: 'manipulation' }}
-            className="flex items-center justify-center py-2.5 px-3 bg-blue-600 shadow-sm shadow-blue-600/20 text-white rounded-xl hover:bg-blue-700 text-sm font-semibold transition-colors cursor-pointer"
+            className="flex flex-1 sm:flex-none items-center justify-center py-2.5 px-3 bg-blue-600 shadow-sm shadow-blue-600/20 text-white rounded-xl hover:bg-blue-700 text-sm font-semibold transition-colors cursor-pointer"
           >
             <motion.div variants={{ rest: { rotate: 0 }, hover: { rotate: 20 } }} transition={{ duration: 0.25, ease: "easeOut" }}>
               <KeyRound className="w-4 h-4 shrink-0" />
@@ -166,7 +166,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
         </div>
       </div>
 
-      <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 items-stretch" style={{ perspective: "1500px" }}>
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 items-stretch" style={{ perspective: "1500px" }}>
         {membres.map((membre: Membre, idx: number) => (
           <TiltContainer 
             variants={itemVariants} 
@@ -176,7 +176,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
               if (membre.role === "proprio") onManage(membre.Batiments);
               else onReport(membre.Batiments);
             }}
-            className="group relative flex flex-col h-full min-h-[500px] rounded-[2rem] shadow-lg transition-transform duration-500 hover:shadow-purple-500/20 cursor-pointer"
+            className="group relative flex flex-col h-full min-h-[400px] sm:min-h-[500px] rounded-[1.5rem] sm:rounded-[2rem] shadow-lg transition-transform duration-500 hover:shadow-purple-500/20 cursor-pointer"
           >
             <BorderGlow 
               className="w-full h-full flex flex-col"
@@ -188,7 +188,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
               fillOpacity={0}
             >
             {/* Base Background: the glass panel and banner */}
-            <div className="absolute inset-0 overflow-hidden flex flex-col rounded-[2rem] glass-panel border border-slate-200/50 dark:border-white/10 pointer-events-none" style={{ transform: "translateZ(0px)" }}>
+            <div className="absolute inset-0 overflow-hidden flex flex-col rounded-[1.5rem] sm:rounded-[2rem] glass-panel border border-slate-200/50 dark:border-white/10 pointer-events-none" style={{ transform: "translateZ(0px)" }}>
               {/* Professional Banner: Integrated & Clean */}
               <div className="relative h-44 w-full overflow-hidden shrink-0">
                 {membre.Batiments?.banner_url ? (
@@ -210,7 +210,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
               {/* Invisible spacer mimicking the banner height so content starts below it */}
               <div className="h-44 w-full shrink-0" />
               
-              <div className="flex-1 flex flex-col p-8 pt-0">
+              <div className="flex-1 flex flex-col p-5 sm:p-8 pt-0">
                 <div className="flex justify-between items-start mb-6 -mt-10" style={{ transform: "translateZ(30px)" }}>
                   <div className={cn(
                     "w-20 h-20 rounded-2xl overflow-hidden shrink-0 flex items-center justify-center",
@@ -235,7 +235,7 @@ export default function BuildingsView({ membres, onCreate, onJoin, onManage, onR
                 </div>
 
                 <div className="flex-1 space-y-4" style={{ transform: "translateZ(20px)" }}>
-                  <h3 className="text-2xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors tracking-tight line-clamp-1 w-fit">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors tracking-tight line-clamp-1 w-fit">
                     {membre.Batiments?.nom}
                   </h3>
                   

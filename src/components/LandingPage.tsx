@@ -52,15 +52,15 @@ export default function LandingPage({ onLoginClick }: { onLoginClick: () => void
       </header>
 
       {/* Contenu principal (similaire au Dashboard Visuellement mais explicatif) */}
-      <main className="max-w-6xl mx-auto px-4 pt-32 pb-28">
+      <main className="max-w-6xl mx-auto px-4 pt-24 sm:pt-32 pb-20 sm:pb-28">
         
         <motion.div 
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.5 }}
-           className="text-center mb-16"
+           className="text-center mb-12 sm:mb-16"
         >
-          <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6 mt-12">
+          <h1 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight mb-6 mt-8 sm:mt-12">
             La gestion de vos bâtiments <br/>
             <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-fuchsia-500 text-transparent bg-clip-text">simplifiée et intelligente</span>
           </h1>
@@ -71,19 +71,19 @@ export default function LandingPage({ onLoginClick }: { onLoginClick: () => void
           </p>
           <MagneticButton
             onClick={onLoginClick}
-            className="cursor-target inline-flex items-center gap-2 h-14 px-8 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 bg-[length:200%_auto] hover:bg-right text-base font-bold text-white transition-all shadow-[0_8px_30px_-5px_rgba(147,51,234,0.4)]"
+            className="cursor-target inline-flex items-center gap-2 h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 bg-[length:200%_auto] hover:bg-right text-sm sm:text-base font-bold text-white transition-all shadow-[0_8px_30px_-5px_rgba(147,51,234,0.4)]"
           >
             <span>Créer mon espace maintenant</span>
             <ArrowRight className="w-5 h-5" />
           </MagneticButton>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-8 rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
+            className="bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
           >
             <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg shadow-purple-500/20">
               <Building className="w-7 h-7" />
@@ -98,7 +98,7 @@ export default function LandingPage({ onLoginClick }: { onLoginClick: () => void
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-8 rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
+            className="bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
           >
             <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg shadow-emerald-500/20">
               <ShieldAlert className="w-7 h-7" />
@@ -113,7 +113,7 @@ export default function LandingPage({ onLoginClick }: { onLoginClick: () => void
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="md:col-span-2 lg:col-span-1 bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-8 rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
+            className="md:col-span-2 lg:col-span-1 bg-white/60 dark:bg-white/[0.02] backdrop-blur-3xl p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] border border-slate-100 dark:border-white/5 shadow-xl shadow-black/5"
           >
             <div className="w-14 h-14 bg-gradient-to-br from-rose-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg shadow-orange-500/20">
               <Users className="w-7 h-7" />

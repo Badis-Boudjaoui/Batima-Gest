@@ -668,8 +668,8 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
         )}
         
         {/* Contenu de la carte (Photo de profil + Infos) */}
-        <div className="px-6 pb-6 relative flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div className="flex flex-col md:flex-row md:items-end gap-5">
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 relative flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-end gap-3 sm:gap-5">
             {/* Avatar */}
             <div className={cn("w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden shrink-0 -mt-10 md:-mt-12 relative z-10", batiment.avatar_url ? "bg-transparent border-none shadow-none" : "bg-white border-4 border-white shadow-md")}>
               {batiment.avatar_url ? (
@@ -683,7 +683,7 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
             
             {/* Informations textuelles */}
             <div className="mt-2 md:mt-0">
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-none mb-2">{batiment.nom}</h1>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-none mb-2">{batiment.nom}</h1>
               {batiment.adresse && (
                 <div className="flex items-center gap-1.5 text-sm font-medium text-slate-500 mb-2">
                   <MapPin className="w-4 h-4 text-slate-400" /> {batiment.adresse}
@@ -710,8 +710,8 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
       </div>
 
       {/* Modern Tabs */}
-      <div className="flex justify-center mb-12">
-        <div className="relative p-1.5 bg-slate-900/5 dark:bg-white/5 backdrop-blur-xl rounded-[24px] border border-slate-200/50 dark:border-white/5 flex flex-wrap gap-1 shadow-sm overflow-hidden">
+      <div className="flex sm:justify-center mb-8 sm:mb-12 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="relative p-1.5 bg-slate-900/5 dark:bg-white/5 backdrop-blur-xl rounded-[24px] border border-slate-200/50 dark:border-white/5 flex flex-nowrap sm:flex-wrap gap-1 shadow-sm overflow-visible w-max sm:w-auto">
           {[
             { id: "vue-ensemble", label: "Vue d'ensemble", icon: <LayoutDashboard className="w-4 h-4" /> },
             { id: "demandes", label: "Demandes", icon: <UserPlus className="w-4 h-4" />, badge: demandes.length },
@@ -776,7 +776,7 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
           {activeTab === "vue-ensemble" && (
             <div className="space-y-8">
               {/* Stats overview */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-1">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-1">
                 {[
                   { value: allLocataires.length, label: "Locataire", plural: "s", color: "blue", icon: <Users className="w-5 h-5" /> },
                   { value: demandes.length, label: "En attente", color: "amber", icon: <UserPlus className="w-5 h-5" /> },
@@ -784,8 +784,8 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
                   { value: pendingTickets, label: "Panne", plural: "s", suffix: " (à traiter)", color: "rose", icon: <ShieldAlert className="w-5 h-5" /> }
                 ].map((stat, i) => (
                   <div key={i} className="h-full">
-                    <motion.div whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 300 }}>
-                      <div className="group relative bg-white dark:bg-zinc-900/40 p-6 rounded-[28px] border border-slate-200/60 dark:border-white/10 shadow-sm flex flex-col items-center text-center overflow-hidden h-full">
+                    <motion.div whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
+                      <div className="group relative bg-white dark:bg-zinc-900/40 p-4 sm:p-6 rounded-[24px] sm:rounded-[28px] border border-slate-200/60 dark:border-white/10 shadow-sm flex flex-col items-center text-center overflow-hidden h-full">
                         <div className={cn(
                           "absolute -right-4 -top-4 w-24 h-24 blur-3xl opacity-10 transition-opacity group-hover:opacity-20",
                           stat.color === 'blue' ? "bg-blue-500" : 

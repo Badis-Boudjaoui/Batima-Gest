@@ -268,9 +268,9 @@ export default function LocataireDashboardView({ user, batiment, onBack, onLeave
                 </div>
                 
                 <div className="flex-1 space-y-2">
-                   <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
                       <div className="flex flex-wrap items-center gap-3">
-                         <h1 className="text-3xl md:text-4xl font-black text-white tracking-tighter line-clamp-1">{batiment.nom}</h1>
+                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tighter line-clamp-1">{batiment.nom}</h1>
                          <div className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full flex items-center gap-1.5">
                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
                            <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none">LOCATAIRE</span>
@@ -366,8 +366,8 @@ export default function LocataireDashboardView({ user, batiment, onBack, onLeave
       </div>
 
       {/* Tabs updated to match owner's modern style */}
-      <div className="flex justify-center mb-10">
-        <div className="relative p-1.5 bg-slate-900/5 dark:bg-white/5 backdrop-blur-xl rounded-[24px] border border-slate-200/50 dark:border-white/5 flex flex-wrap gap-1 shadow-sm overflow-hidden">
+      <div className="flex sm:justify-center mb-8 sm:mb-10 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="relative p-1.5 bg-slate-900/5 dark:bg-white/5 backdrop-blur-xl rounded-[24px] border border-slate-200/50 dark:border-white/5 flex flex-nowrap sm:flex-wrap gap-1 shadow-sm overflow-visible w-max sm:w-auto">
           {[
             { id: "affichage", label: "Affichage", icon: <ClipboardList className="w-4 h-4" />, badge: annonces.length },
             { id: "signaler", label: "Signaler", icon: <Wrench className="w-4 h-4" /> },
@@ -478,13 +478,13 @@ export default function LocataireDashboardView({ user, batiment, onBack, onLeave
           )}
 
           {activeTab === "signaler" && (
-            <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto relative overflow-hidden">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-[4px] bg-blue-600"></div>
-              <div className="mb-8 text-center">
-                <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-blue-100">
-                  <Wrench className="w-8 h-8" />
+              <div className="mb-6 sm:mb-8 text-center">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-blue-100">
+                  <Wrench className="w-6 h-6 sm:w-8 sm:h-8" />
                 </div>
-                <h2 className="text-2xl font-extrabold text-slate-900">Signaler une panne</h2>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">Signaler une panne</h2>
                 <p className="text-slate-500 text-sm mt-2">Aidez la gestion à intervenir rapidement.</p>
               </div>
 
