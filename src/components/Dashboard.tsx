@@ -122,6 +122,16 @@ export default function Dashboard() {
   const [isDockSearching, setIsDockSearching] = useState(false);
   const [hoveredSearchResultId, setHoveredSearchResultId] = useState<string | null>(null);
 
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 640;
+
   useEffect(() => {
     // Premier fetch au montage
     fetchUserData();
@@ -378,7 +388,7 @@ export default function Dashboard() {
   const dockItems = [
     { icon: <Building size={20} />, label: 'Batiments', onClick: () => handleNavClick("list") },
     { 
-      customWidth: isSearchDockExpanded ? 280 : undefined,
+      customWidth: isSearchDockExpanded ? (isMobile ? Math.max(140, windowWidth - 210) : 280) : undefined,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {/* Default Search Icon - visible when collapsed */}
@@ -402,7 +412,7 @@ export default function Dashboard() {
             <input 
               ref={searchInputRef}
               type="text" 
-              placeholder="Rechercher..." 
+              placeholder={isMobile && isSearchDockExpanded ? "Recherche..." : "Rechercher..."} 
               value={dockSearchTerm}
               onChange={(e) => {
                  setDockSearchTerm(e.target.value);
@@ -679,9 +689,9 @@ export default function Dashboard() {
 
         <Dock 
           items={dockItems} 
-          panelHeight={68} 
-          baseItemSize={48} 
-          magnification={65} 
+          panelHeight={isMobile ? 58 : 68} 
+          baseItemSize={isMobile ? 42 : 48} 
+          magnification={isMobile ? 55 : 65} 
         />
       </div>
     </div>
