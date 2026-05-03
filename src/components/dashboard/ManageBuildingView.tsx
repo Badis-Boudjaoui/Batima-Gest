@@ -784,7 +784,7 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
                   { value: pendingTickets, label: "Panne", plural: "s", suffix: " (à traiter)", color: "rose", icon: <ShieldAlert className="w-5 h-5" /> }
                 ].map((stat, i) => (
                   <div key={i} className="h-full">
-                    <TiltCard>
+                    <motion.div whileHover={{ y: -5 }} transition={{ type: "spring", stiffness: 300 }}>
                       <div className="group relative bg-white dark:bg-zinc-900/40 p-6 rounded-[28px] border border-slate-200/60 dark:border-white/10 shadow-sm flex flex-col items-center text-center overflow-hidden h-full">
                         <div className={cn(
                           "absolute -right-4 -top-4 w-24 h-24 blur-3xl opacity-10 transition-opacity group-hover:opacity-20",
@@ -814,7 +814,7 @@ export default function ManageBuildingView({ batiment, onBack, user, onViewUser,
                           {stat.label}{stat.plural && stat.value !== 1 ? stat.plural : ''} {stat.suffix || ''}
                         </span>
                       </div>
-                    </TiltCard>
+                    </motion.div>
                   </div>
                 ))}
               </div>
