@@ -1,62 +1,6 @@
-"use client";
-
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import { supabase } from "../../lib/supabase";
+import React from "react";
 import { cn } from "../../lib/utils";
-import Auth from "../Auth";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, LayoutGroup } from "motion/react";
-import DarkVeil from "../DarkVeil";
-import { Magnetic } from "../ui/magnetic";
-import Dock from "../Dock";
-import { MaskedAvatars } from "../ui/masked-avatars";
-import BorderGlow from "../ui/BorderGlow";
-import ImageCropperModal from "../ui/ImageCropperModal";
-import AnimatedLogo from "../ui/AnimatedLogo";
-import {
-  Building,
-  Plus,
-  KeyRound,
-  Wrench,
-  AlertOctagon,
-  LogOut,
-  AlertTriangle,
-  Trash2,
-  UploadCloud,
-  ChevronLeft,
-  ArrowRight,
-  ShieldCheck,
-  ClipboardList,
-  User as UserIcon,
-  Search,
-  MessageCircle,
-  Send,
-  FileImage,
-  Paperclip,
-  Smile,
-  CheckCircle,
-  Clock,
-  Loader2,
-  Settings,
-  Users,
-  ImagePlus,
-  MapPin,
-  Moon,
-  Sun,
-  ChevronDown,
-  Monitor,
-  X,
-  LayoutDashboard,
-  UserPlus,
-  ShieldAlert,
-  Megaphone,
-  Library,
-  Sliders
-} from "lucide-react";
-
-
-import { User, Batiment, Membre, Ressource } from "../../types";
-
-
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "motion/react";
 
 export default function TiltContainer({ children, className, variants, initial, whileHover, layoutId }: any) {
   const x = useMotionValue(0);
@@ -71,6 +15,9 @@ export default function TiltContainer({ children, className, variants, initial, 
   const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
   const glareOpacity = useMotionValue(0);
+
+  // Utilisation de useMotionTemplate pour éviter le crash en production
+  const background = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.3) 0%, transparent 80%)`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -110,13 +57,13 @@ export default function TiltContainer({ children, className, variants, initial, 
         }}
         className="w-full h-full"
       >
-        {/* Dynamic Glare Effect */}
+        {/* Dynamic Glare Effect corrigé */}
         <motion.div
           style={{
-            background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.3) 0%, transparent 80%)`,
+            background,
             opacity: glareOpacity,
           }}
-          className="absolute inset-0 pointer-events-none rounded-[2rem] z-0"
+          className="absolute inset-0 pointer-events-none rounded-[28px] z-0"
         />
 
         <div
