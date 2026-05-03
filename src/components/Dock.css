@@ -1,0 +1,105 @@
+.dock-outer {
+  margin: 0 0.5rem;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  pointer-events: none; /* Allows clicking through the outer container */
+}
+
+.dock-panel {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  width: fit-content;
+  gap: 1rem;
+  border-radius: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  padding: 0 1rem 0.6rem;
+  pointer-events: auto; /* Restores clickability for the panel */
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+[data-theme='oled'] .dock-panel {
+  background-color: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(30, 41, 59, 0.4);
+}
+
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: white;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  color: #64748b;
+}
+
+.dock-item:hover {
+  background-color: white;
+  color: #7c3aed;
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.2);
+}
+
+[data-theme='oled'] .dock-item {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+[data-theme='oled'] .dock-item:hover {
+  background-color: #222;
+  color: #a78bfa;
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dock-label {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background-color: white;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+[data-theme='oled'] .dock-label {
+  background-color: #111;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Remix: Batima-Gest",
+  "description": "Application de gestion immobilière permettant la gestion des ressources et le signalement de pannes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
