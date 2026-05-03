@@ -385,10 +385,15 @@ export default function Dashboard() {
     }
   };
 
+  // Dynamic sizing to guarantee it never overflows on mobile
+  const mobileBaseSize = isSearchDockExpanded ? 38 : 46;
+  const currentBaseItemSize = isMobile ? mobileBaseSize : 48;
+  const currentPanelHeight = isMobile ? (isSearchDockExpanded ? 58 : 66) : 68;
+  
   const dockItems = [
     { icon: <Building size={20} />, label: 'Batiments', onClick: () => handleNavClick("list") },
     { 
-      customWidth: isSearchDockExpanded ? (isMobile ? Math.max(140, windowWidth - 210) : 280) : undefined,
+      customWidth: isSearchDockExpanded ? (isMobile ? Math.max(120, windowWidth - 200) : 280) : undefined,
       icon: (
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {/* Default Search Icon - visible when collapsed */}
@@ -689,8 +694,8 @@ export default function Dashboard() {
 
         <Dock 
           items={dockItems} 
-          panelHeight={isMobile ? 58 : 68} 
-          baseItemSize={isMobile ? 42 : 48} 
+          panelHeight={currentPanelHeight} 
+          baseItemSize={currentBaseItemSize} 
           magnification={isMobile ? 55 : 65} 
         />
       </div>
