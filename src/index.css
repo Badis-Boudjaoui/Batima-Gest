@@ -287,7 +287,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(0, 0, 0, 0.4);
 }
 
-:root .messages-mobile-header {
+[data-theme='light'] .messages-mobile-header {
   background: rgba(255, 255, 255, 0.5);
   border-bottom-color: rgba(226, 232, 240, 0.3);
 }
@@ -318,7 +318,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   line-height: 1.2;
 }
 
-:root .messages-mobile-title {
+[data-theme='light'] .messages-mobile-title {
   color: #0f172a;
 }
 
@@ -330,7 +330,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   margin-top: 1px;
 }
 
-:root .messages-mobile-subtitle {
+[data-theme='light'] .messages-mobile-subtitle {
   color: #94a3b8;
 }
 
@@ -372,7 +372,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   margin-bottom: 8px;
 }
 
-:root .messages-mobile-empty-title {
+[data-theme='light'] .messages-mobile-empty-title {
   color: #64748b;
 }
 
@@ -383,7 +383,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   line-height: 1.5;
 }
 
-:root .messages-mobile-empty-desc {
+[data-theme='light'] .messages-mobile-empty-desc {
   color: #94a3b8;
 }
 
@@ -418,7 +418,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(255, 255, 255, 0.03);
 }
 
-:root .messages-mobile-conv-item:not(.messages-mobile-conv-item--active):hover {
+[data-theme='light'] .messages-mobile-conv-item:not(.messages-mobile-conv-item--active):hover {
   background: rgba(0, 0, 0, 0.03);
 }
 
@@ -436,7 +436,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   transition: transform 0.2s ease;
 }
 
-:root .messages-mobile-conv-avatar {
+[data-theme='light'] .messages-mobile-conv-avatar {
   background: #e2e8f0;
 }
 
@@ -466,7 +466,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   max-width: 65%;
 }
 
-:root .messages-mobile-conv-name {
+[data-theme='light'] .messages-mobile-conv-name {
   color: #1e293b;
 }
 
@@ -477,7 +477,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   flex-shrink: 0;
 }
 
-:root .messages-mobile-conv-time {
+[data-theme='light'] .messages-mobile-conv-time {
   color: #94a3b8;
 }
 
@@ -490,7 +490,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   line-height: 1.4;
 }
 
-:root .messages-mobile-conv-preview {
+[data-theme='light'] .messages-mobile-conv-preview {
   color: #64748b;
 }
 
@@ -511,7 +511,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(0, 0, 0, 0.5);
 }
 
-:root .messages-mobile-chat-header {
+[data-theme='light'] .messages-mobile-chat-header {
   background: rgba(255, 255, 255, 0.7);
   border-bottom-color: rgba(226, 232, 240, 0.4);
 }
@@ -532,7 +532,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   -webkit-tap-highlight-color: transparent;
 }
 
-:root .messages-mobile-back-btn {
+[data-theme='light'] .messages-mobile-back-btn {
   color: #475569;
   background: rgba(0, 0, 0, 0.04);
   border-color: rgba(0, 0, 0, 0.06);
@@ -542,7 +542,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(255, 255, 255, 0.12);
 }
 
-:root .messages-mobile-back-btn:active {
+[data-theme='light'] .messages-mobile-back-btn:active {
   background: rgba(0, 0, 0, 0.08);
 }
 
@@ -587,7 +587,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   line-height: 1.2;
 }
 
-:root .messages-mobile-chat-username {
+[data-theme='light'] .messages-mobile-chat-username {
   color: #0f172a;
 }
 
@@ -601,7 +601,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   text-overflow: ellipsis;
 }
 
-:root .messages-mobile-chat-profession {
+[data-theme='light'] .messages-mobile-chat-profession {
   color: #94a3b8;
 }
 
@@ -620,7 +620,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(0, 0, 0, 0.15);
 }
 
-:root .messages-mobile-messages {
+[data-theme='light'] .messages-mobile-messages {
   background: rgba(248, 250, 252, 0.3);
 }
 
@@ -648,7 +648,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   letter-spacing: 0.12em;
 }
 
-:root .messages-mobile-messages-empty-pill {
+[data-theme='light'] .messages-mobile-messages-empty-pill {
   color: #64748b;
 }
 
@@ -657,7 +657,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   color: rgba(255, 255, 255, 0.3);
 }
 
-:root .messages-mobile-messages-empty-text {
+[data-theme='light'] .messages-mobile-messages-empty-text {
   color: #94a3b8;
 }
 
@@ -682,7 +682,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   -webkit-backdrop-filter: blur(10px);
 }
 
-:root .messages-mobile-date-pill {
+[data-theme='light'] .messages-mobile-date-pill {
   background: #f1f5f9;
   border-color: #e2e8f0;
   color: #64748b;
@@ -745,7 +745,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-:root .messages-mobile-msg-bubble--other {
+[data-theme='light'] .messages-mobile-msg-bubble--other {
   background: white;
   color: #1e293b;
   border-color: #e2e8f0;
@@ -780,7 +780,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   letter-spacing: 0.03em;
 }
 
-:root .messages-mobile-msg-time {
+[data-theme='light'] .messages-mobile-msg-time {
   color: #94a3b8;
 }
 
@@ -799,7 +799,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   background: rgba(0, 0, 0, 0.5);
 }
 
-:root .messages-mobile-input-area {
+[data-theme='light'] .messages-mobile-input-area {
   background: rgba(255, 255, 255, 0.8);
   border-top-color: rgba(226, 232, 240, 0.4);
 }
@@ -814,7 +814,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   padding: 4px 4px 4px 6px;
 }
 
-:root .messages-mobile-input-form {
+[data-theme='light'] .messages-mobile-input-form {
   background: rgba(241, 245, 249, 0.7);
   border-color: rgba(226, 232, 240, 0.5);
 }
@@ -836,11 +836,11 @@ input:focus, textarea:focus, select:focus, button:focus {
   color: rgba(255, 255, 255, 0.25);
 }
 
-:root .messages-mobile-input {
+[data-theme='light'] .messages-mobile-input {
   color: #1e293b;
 }
 
-:root .messages-mobile-input::placeholder {
+[data-theme='light'] .messages-mobile-input::placeholder {
   color: #94a3b8;
 }
 
@@ -870,7 +870,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   cursor: not-allowed;
 }
 
-:root .messages-mobile-send-btn--disabled {
+[data-theme='light'] .messages-mobile-send-btn--disabled {
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.15);
 }
