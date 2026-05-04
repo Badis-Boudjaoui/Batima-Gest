@@ -50,7 +50,8 @@ import {
   ShieldAlert,
   Megaphone,
   Library,
-  Sliders
+  Sliders,
+  ArrowLeft
 } from "lucide-react";
 
 
@@ -66,6 +67,18 @@ export default function MessagesView({ currentUserId, initialTargetUserId, onVie
   const [chatUser, setChatUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Mobile detection
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const isMobile = windowWidth < 768;
+
+  // Mobile panel state: 'list' or 'chat'
+  const [mobilePanel, setMobilePanel] = useState<'list' | 'chat'>(initialTargetUserId ? 'chat' : 'list');
 
   useEffect(() => {
     fetchConversations();
@@ -227,6 +240,304 @@ export default function MessagesView({ currentUserId, initialTargetUserId, onVie
     }
   };
 
+  // Mobile: select conversation & switch to chat panel
+  const handleSelectConversation = (userId: string) => {
+    setActiveChatUserId(userId);
+    if (isMobile) {
+      setMobilePanel('chat');
+    }
+  };
+
+  // Mobile: go back to conversation list
+  const handleMobileBack = () => {
+    setMobilePanel('list');
+    // Don't clear active chat so the highlight remains on desktop if resized
+  };
+
+  // Format relative time for conversation list
+  const formatRelativeTime = (dateStr: string) => {
+    const now = new Date();
+    const date = new Date(dateStr);
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return "Maintenant";
+    if (diffMins < 60) return `${diffMins}m`;
+    if (diffHours < 24) return `${diffHours}h`;
+    if (diffDays < 7) return `${diffDays}j`;
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  };
+
+  // ─── MOBILE LAYOUT ───────────────────────────────────────────────
+  if (isMobile) {
+    return (
+      <div className="messages-mobile-container">
+        <AnimatePresence mode="wait" initial={false}>
+          {mobilePanel === 'list' ? (
+            <motion.div
+              key="mobile-list"
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -30, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="messages-mobile-panel"
+            >
+              {/* Mobile Header */}
+              <div className="messages-mobile-header">
+                <div className="messages-mobile-header-content">
+                  <div className="messages-mobile-header-icon">
+                    <MessageCircle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="messages-mobile-title">Messages</h2>
+                    <p className="messages-mobile-subtitle">{conversations.length} conversation{conversations.length !== 1 ? 's' : ''}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Conversations List */}
+              <div className="messages-mobile-list">
+                {conversations.length === 0 ? (
+                  <div className="messages-mobile-empty">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="messages-mobile-empty-icon"
+                    >
+                      <MessageCircle className="w-8 h-8 text-purple-400/60" />
+                    </motion.div>
+                    <p className="messages-mobile-empty-title">Aucune conversation</p>
+                    <p className="messages-mobile-empty-desc">Recherchez un utilisateur pour démarrer une discussion</p>
+                  </div>
+                ) : (
+                  <div className="messages-mobile-conversations">
+                    {conversations.map((c, idx) => (
+                      <motion.div
+                        key={c.user?.id || idx}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.04, type: "spring", stiffness: 500, damping: 35 }}
+                        onClick={() => { if (c.user?.id) handleSelectConversation(c.user.id); }}
+                        className={cn(
+                          "messages-mobile-conv-item",
+                          activeChatUserId === c.user?.id && "messages-mobile-conv-item--active"
+                        )}
+                      >
+                        <div className={cn(
+                          "messages-mobile-conv-avatar",
+                          activeChatUserId === c.user?.id ? "messages-mobile-conv-avatar--active" : ""
+                        )}>
+                          {c.user?.avatar_url ? (
+                            <img src={c.user.avatar_url} className="w-full h-full object-cover" />
+                          ) : (
+                            <UserIcon className={cn("w-5 h-5", activeChatUserId === c.user?.id ? "text-white" : "text-slate-400")} />
+                          )}
+                        </div>
+                        <div className="messages-mobile-conv-info">
+                          <div className="messages-mobile-conv-top">
+                            <span className={cn(
+                              "messages-mobile-conv-name",
+                              activeChatUserId === c.user?.id ? "text-white" : ""
+                            )}>
+                              {c.user?.first_name || "Utilisateur"} {c.user?.last_name || ""}
+                            </span>
+                            <span className={cn(
+                              "messages-mobile-conv-time",
+                              activeChatUserId === c.user?.id ? "text-purple-200" : ""
+                            )}>
+                              {formatRelativeTime(c.latest_date)}
+                            </span>
+                          </div>
+                          <p className={cn(
+                            "messages-mobile-conv-preview",
+                            activeChatUserId === c.user?.id ? "text-purple-100" : ""
+                          )}>
+                            {c.latest_message}
+                          </p>
+                        </div>
+                        <ChevronLeft className={cn(
+                          "w-4 h-4 shrink-0 rotate-180 transition-transform",
+                          activeChatUserId === c.user?.id ? "text-white/60" : "text-slate-300 dark:text-white/10"
+                        )} />
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="mobile-chat"
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 30, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className="messages-mobile-panel messages-mobile-chat-panel"
+            >
+              {activeChatUserId && chatUser ? (
+                <>
+                  {/* Mobile Chat Header */}
+                  <div className="messages-mobile-chat-header">
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      onClick={handleMobileBack}
+                      className="messages-mobile-back-btn"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                    </motion.button>
+                    <div 
+                      className="messages-mobile-chat-user"
+                      onClick={() => onViewUser(activeChatUserId)}
+                    >
+                      <div className={cn(
+                        "messages-mobile-chat-avatar",
+                        chatUser.avatar_url ? "" : "messages-mobile-chat-avatar--placeholder"
+                      )}>
+                        {chatUser.avatar_url ? (
+                          <img src={chatUser.avatar_url} className="w-full h-full object-cover" />
+                        ) : (
+                          <UserIcon className="w-5 h-5 text-white" />
+                        )}
+                      </div>
+                      <div className="messages-mobile-chat-user-info">
+                        <h3 className="messages-mobile-chat-username">
+                          {chatUser.first_name} {chatUser.last_name}
+                        </h3>
+                        {chatUser.profession && (
+                          <p className="messages-mobile-chat-profession">{chatUser.profession}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Messages */}
+                  <div className="messages-mobile-messages custom-scrollbar">
+                    {messages.length === 0 && !loading && (
+                      <div className="messages-mobile-messages-empty">
+                        <div className="messages-mobile-messages-empty-pill">
+                          <span>🔒</span>
+                          <span>Messagerie sécurisée</span>
+                        </div>
+                        <p className="messages-mobile-messages-empty-text">
+                          Commencez l'échange avec {chatUser.first_name}
+                        </p>
+                      </div>
+                    )}
+                    
+                    <AnimatePresence initial={false}>
+                      {messages.map((m, i) => {
+                        const isMe = m.sender_id === currentUserId;
+                        const prevMsg = i > 0 ? messages[i-1] : null;
+                        const nextMsg = i < messages.length - 1 ? messages[i+1] : null;
+                        const isGroupStart = !prevMsg || prevMsg.sender_id !== m.sender_id;
+                        const isGroupEnd = !nextMsg || nextMsg.sender_id !== m.sender_id;
+                        
+                        const msgDate = new Date(m.created_at);
+                        const prevMsgDate = prevMsg ? new Date(prevMsg.created_at) : null;
+                        const showDateSeparator = !prevMsgDate || 
+                          msgDate.toDateString() !== prevMsgDate.toDateString();
+
+                        return (
+                          <React.Fragment key={m.id || i}>
+                            {showDateSeparator && (
+                              <div className="messages-mobile-date-separator">
+                                <span className="messages-mobile-date-pill">
+                                  {msgDate.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                                </span>
+                              </div>
+                            )}
+                            <motion.div 
+                              initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              className={cn(
+                                "messages-mobile-msg-row",
+                                isMe ? "messages-mobile-msg-row--me" : "messages-mobile-msg-row--other",
+                                !isGroupStart ? "messages-mobile-msg-row--grouped" : ""
+                              )}
+                            >
+                              <div className={cn(
+                                "messages-mobile-msg-bubble-wrap",
+                                isMe ? "messages-mobile-msg-bubble-wrap--me" : "messages-mobile-msg-bubble-wrap--other"
+                              )}>
+                                <div className={cn(
+                                  "messages-mobile-msg-bubble",
+                                  isMe 
+                                    ? "messages-mobile-msg-bubble--me" 
+                                    : "messages-mobile-msg-bubble--other",
+                                  isMe 
+                                    ? cn(isGroupEnd ? "messages-mobile-msg-bubble--me-end" : "") 
+                                    : cn(isGroupEnd ? "messages-mobile-msg-bubble--other-end" : "")
+                                )}>
+                                  {m.contenu}
+                                </div>
+                                {isGroupEnd && (
+                                  <div className={cn(
+                                    "messages-mobile-msg-meta",
+                                    isMe ? "messages-mobile-msg-meta--me" : "messages-mobile-msg-meta--other"
+                                  )}>
+                                    <span className="messages-mobile-msg-time">
+                                      {new Date(m.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                    {isMe && (
+                                      <span className={m.status === 'read' ? "text-blue-400" : "text-slate-400 dark:text-white/20"}>
+                                        {m.status === 'read' ? <CheckCircle className="w-2.5 h-2.5" /> : <Clock className="w-2.5 h-2.5" />}
+                                      </span>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </motion.div>
+                          </React.Fragment>
+                        );
+                      })}
+                    </AnimatePresence>
+                    <div ref={messagesEndRef} />
+                  </div>
+
+                  {/* Mobile Input */}
+                  <div className="messages-mobile-input-area">
+                    <form 
+                      onSubmit={handleSend} 
+                      className="messages-mobile-input-form"
+                    >
+                      <input 
+                        type="text"
+                        placeholder="Votre message..."
+                        className="messages-mobile-input"
+                        value={newMessage}
+                        onChange={e => setNewMessage(e.target.value)}
+                      />
+                      <motion.button 
+                        whileTap={newMessage.trim() ? { scale: 0.9 } : {}}
+                        type="submit"
+                        disabled={!newMessage.trim()}
+                        className={cn(
+                          "messages-mobile-send-btn",
+                          newMessage.trim() 
+                            ? "messages-mobile-send-btn--active" 
+                            : "messages-mobile-send-btn--disabled"
+                        )}
+                      >
+                        <Send className="w-[18px] h-[18px]" />
+                      </motion.button>
+                    </form>
+                  </div>
+                </>
+              ) : (
+                <div className="messages-mobile-messages-empty" style={{ height: '100%' }}>
+                  <Loader2 className="w-6 h-6 animate-spin text-purple-400" />
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  // ─── DESKTOP LAYOUT (unchanged) ──────────────────────────────────
   return (
     <div className="max-w-6xl mx-auto h-[750px] bg-white dark:bg-black rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl flex overflow-hidden backdrop-blur-xl transition-all">
       

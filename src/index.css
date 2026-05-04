@@ -237,3 +237,653 @@ input:focus, textarea:focus, select:focus, button:focus {
 .shadow-glow {
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE MESSAGING — Premium full-screen chat experience
+   These styles ONLY affect mobile (<768px) and use unique class
+   names, so the desktop layout remains completely untouched.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.messages-mobile-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 140px);
+  min-height: 400px;
+  max-height: calc(100dvh - 140px);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+[data-theme='oled'] .messages-mobile-container {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.messages-mobile-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.messages-mobile-chat-panel {
+  position: relative;
+}
+
+/* ── Mobile Header ────────────────────────────────────────────── */
+.messages-mobile-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+[data-theme='oled'] .messages-mobile-header {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+:root .messages-mobile-header {
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(226, 232, 240, 0.3);
+}
+
+.messages-mobile-header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.messages-mobile-header-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(99, 102, 241, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a78bfa;
+  flex-shrink: 0;
+}
+
+.messages-mobile-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+:root .messages-mobile-title {
+  color: #0f172a;
+}
+
+.messages-mobile-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+
+:root .messages-mobile-subtitle {
+  color: #94a3b8;
+}
+
+/* ── Conversations List ───────────────────────────────────────── */
+.messages-mobile-list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.messages-mobile-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px;
+  text-align: center;
+  height: 100%;
+}
+
+.messages-mobile-empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.messages-mobile-empty-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+:root .messages-mobile-empty-title {
+  color: #64748b;
+}
+
+.messages-mobile-empty-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.25);
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+:root .messages-mobile-empty-desc {
+  color: #94a3b8;
+}
+
+.messages-mobile-conversations {
+  padding: 8px 12px;
+}
+
+/* ── Conversation Item ────────────────────────────────────────── */
+.messages-mobile-conv-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.messages-mobile-conv-item:active {
+  transform: scale(0.98);
+}
+
+.messages-mobile-conv-item--active {
+  background: linear-gradient(135deg, #7c3aed, #6366f1) !important;
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.4),
+              0 0 0 1px rgba(124, 58, 237, 0.2);
+}
+
+[data-theme='oled'] .messages-mobile-conv-item:not(.messages-mobile-conv-item--active):hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+:root .messages-mobile-conv-item:not(.messages-mobile-conv-item--active):hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.messages-mobile-conv-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+:root .messages-mobile-conv-avatar {
+  background: #e2e8f0;
+}
+
+.messages-mobile-conv-avatar--active {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.messages-mobile-conv-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.messages-mobile-conv-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.messages-mobile-conv-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 65%;
+}
+
+:root .messages-mobile-conv-name {
+  color: #1e293b;
+}
+
+.messages-mobile-conv-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+:root .messages-mobile-conv-time {
+  color: #94a3b8;
+}
+
+.messages-mobile-conv-preview {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+:root .messages-mobile-conv-preview {
+  color: #64748b;
+}
+
+/* ── Mobile Chat Header ──────────────────────────────────────── */
+.messages-mobile-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  z-index: 20;
+}
+
+[data-theme='oled'] .messages-mobile-chat-header {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+:root .messages-mobile-chat-header {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom-color: rgba(226, 232, 240, 0.4);
+}
+
+.messages-mobile-back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root .messages-mobile-back-btn {
+  color: #475569;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.messages-mobile-back-btn:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+:root .messages-mobile-back-btn:active {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.messages-mobile-chat-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.messages-mobile-chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(124, 58, 237, 0.12);
+  box-shadow: 0 4px 12px -2px rgba(124, 58, 237, 0.15);
+}
+
+.messages-mobile-chat-avatar--placeholder {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(99, 102, 241, 0.8));
+}
+
+.messages-mobile-chat-user-info {
+  min-width: 0;
+}
+
+.messages-mobile-chat-username {
+  font-size: 15px;
+  font-weight: 800;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+:root .messages-mobile-chat-username {
+  color: #0f172a;
+}
+
+.messages-mobile-chat-profession {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:root .messages-mobile-chat-profession {
+  color: #94a3b8;
+}
+
+/* ── Messages Area ────────────────────────────────────────────── */
+.messages-mobile-messages {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+[data-theme='oled'] .messages-mobile-messages {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+:root .messages-mobile-messages {
+  background: rgba(248, 250, 252, 0.3);
+}
+
+.messages-mobile-messages-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 10px;
+}
+
+.messages-mobile-messages-empty-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+:root .messages-mobile-messages-empty-pill {
+  color: #64748b;
+}
+
+.messages-mobile-messages-empty-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+:root .messages-mobile-messages-empty-text {
+  color: #94a3b8;
+}
+
+/* ── Date Separator ───────────────────────────────────────────── */
+.messages-mobile-date-separator {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.messages-mobile-date-pill {
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+:root .messages-mobile-date-pill {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+
+/* ── Message Rows ─────────────────────────────────────────────── */
+.messages-mobile-msg-row {
+  display: flex;
+  width: 100%;
+}
+
+.messages-mobile-msg-row--me {
+  justify-content: flex-end;
+}
+
+.messages-mobile-msg-row--other {
+  justify-content: flex-start;
+}
+
+.messages-mobile-msg-row--grouped {
+  margin-top: -2px;
+}
+
+.messages-mobile-msg-bubble-wrap {
+  max-width: 82%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-mobile-msg-bubble-wrap--me {
+  align-items: flex-end;
+}
+
+.messages-mobile-msg-bubble-wrap--other {
+  align-items: flex-start;
+}
+
+/* ── Message Bubbles ──────────────────────────────────────────── */
+.messages-mobile-msg-bubble {
+  padding: 10px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  border-radius: 20px;
+  word-break: break-word;
+}
+
+.messages-mobile-msg-bubble--me {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+  box-shadow: 0 4px 14px -3px rgba(124, 58, 237, 0.35);
+}
+
+.messages-mobile-msg-bubble--me-end {
+  border-bottom-right-radius: 6px;
+}
+
+.messages-mobile-msg-bubble--other {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+:root .messages-mobile-msg-bubble--other {
+  background: white;
+  color: #1e293b;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.messages-mobile-msg-bubble--other-end {
+  border-bottom-left-radius: 6px;
+}
+
+/* ── Message Meta ─────────────────────────────────────────────── */
+.messages-mobile-msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.messages-mobile-msg-meta--me {
+  justify-content: flex-end;
+}
+
+.messages-mobile-msg-meta--other {
+  justify-content: flex-start;
+}
+
+.messages-mobile-msg-time {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.03em;
+}
+
+:root .messages-mobile-msg-time {
+  color: #94a3b8;
+}
+
+/* ── Mobile Input Area ────────────────────────────────────────── */
+.messages-mobile-input-area {
+  padding: 10px 12px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  z-index: 30;
+}
+
+[data-theme='oled'] .messages-mobile-input-area {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+:root .messages-mobile-input-area {
+  background: rgba(255, 255, 255, 0.8);
+  border-top-color: rgba(226, 232, 240, 0.4);
+}
+
+.messages-mobile-input-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 4px 4px 4px 6px;
+}
+
+:root .messages-mobile-input-form {
+  background: rgba(241, 245, 249, 0.7);
+  border-color: rgba(226, 232, 240, 0.5);
+}
+
+.messages-mobile-input {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none !important;
+  color: white;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.messages-mobile-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+:root .messages-mobile-input {
+  color: #1e293b;
+}
+
+:root .messages-mobile-input::placeholder {
+  color: #94a3b8;
+}
+
+.messages-mobile-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.messages-mobile-send-btn--active {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+  box-shadow: 0 6px 16px -3px rgba(124, 58, 237, 0.45);
+}
+
+.messages-mobile-send-btn--disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.12);
+  cursor: not-allowed;
+}
+
+:root .messages-mobile-send-btn--disabled {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* ── Mobile scrollbar override ────────────────────────────────── */
+.messages-mobile-list::-webkit-scrollbar,
+.messages-mobile-messages::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.messages-mobile-list,
+.messages-mobile-messages {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
